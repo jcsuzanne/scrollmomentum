@@ -8,5 +8,8 @@
     "url": "https://jcsuzanne@bitbucket.org/jcsuzanne/scrollmomentum.git"
   },
   "author": "jean-christophe suzanne",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jquery": "^2.1.0"
+  }
 }
