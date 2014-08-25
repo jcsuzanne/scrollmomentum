@@ -9,7 +9,7 @@
   },
   "author": "jean-christophe suzanne",
   "license": "ISC",
-  "dependencies"  : {
-    "underscore"  : ">=1.5.0"
+  "dependencies": {
+    "underscore": ">=1.5.0"
   }
 }
