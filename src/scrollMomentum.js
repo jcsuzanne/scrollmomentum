@@ -5,7 +5,7 @@
 
  Usage
  -----
- var gScroll = scrollmomentum.init({
+ var gScroll = new scrollMomentum({
     body : $('#master'),
     receptor : $('#seReceptor'),
     fx : {
@@ -17,21 +17,28 @@
 (function(window, document, undefined) {
 'use strict';
 
-    var scrollmomentum = window.scrollmomentum = {
-        get: function() {
-            return _instance;
-        },
-        //Main entry point.
-        init: function(options) {
-            new scrollMomentum(options);
-            // return _instance || new scrollMomentum(options);
+    // Singleton
+    var
+        _instance
+    ,   $html
+    ,   $body
+    ,   $receptor
+    ,   $window         =   $(window)
+    ,   tween
+    ,   defaults        =   {
+            pointerEvents : true,
+            resizeReceptor : true,
+            fx : {
+                duration : .5,
+                easing : Power3.easeOut
+            }
         }
-    };
+    ,   settings        =   {}
+    ,   timer
+    ;
 
-    /**
-     * Constructor.
-     */
-    function scrollMomentum(options) {
+
+    var scrollMomentum = function(options) {
         _instance       =   this;
         settings        =   $.extend({},defaults,options);
         $html           =   $('body');
@@ -39,7 +46,7 @@
         $receptor       =   settings.receptor;
         _instance.construct();
         return _instance;
-    }
+    };
 
     scrollMomentum.prototype.construct = function()
     {
@@ -104,23 +111,22 @@
         });
     }
 
-    // Singleton
-    var
-        _instance
-    ,   $html
-    ,   $body
-    ,   $receptor
-    ,   $window         =   $(window)
-    ,   tween
-    ,   defaults        =   {
-            pointerEvents : true,
-            resizeReceptor : true,
-            fx : {
-                duration : .5,
-                easing : Power3.easeOut
-            }
-        }
-    ,   settings        =   {}
-    ,   timer
-    ;
+
+    // Based off Lo-Dash's excellent UMD wrapper (slightly modified) - https://github.com/bestiejs/lodash/blob/master/lodash.js#L5515-L5543
+    // some AMD build optimizers, like r.js, check for specific condition patterns like the following:
+    if(typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+    // define as an anonymous module
+    define(function() {
+      return scrollMomentum;
+    });
+    // check for `exports` after `define` in case a build optimizer adds an `exports` object
+    }
+    else if(typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = scrollMomentum;
+    }
+    else {
+    window.scrollMomentum = scrollMomentum;
+    }
+
+
 }(window, document));
