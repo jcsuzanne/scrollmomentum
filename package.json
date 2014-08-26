@@ -1,7 +1,7 @@
 {
   "name": "scrollmomentum",
   "title":"scroll Momentum",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "smooth scroll",
   "main": "src/scrollMomentum.js",
   "repository": {
