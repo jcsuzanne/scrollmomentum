@@ -23,14 +23,14 @@
     ,   $html
     ,   $body
     ,   $receptor
-    ,   $window         =   $(window)
+    ,   $window
     ,   tween
     ,   defaults        =   {
             pointerEvents : true,
             resizeReceptor : true,
             fx : {
                 duration : .5,
-                easing : Power3.easeOut
+                easing : null
             }
         }
     ,   settings        =   {}
@@ -40,6 +40,8 @@
 
     var scrollMomentum = function(options) {
         _instance       =   this;
+        $window         =   $(window);
+        defaults.fx.easing = Cubic.easeOut;
         settings        =   $.extend({},defaults,options);
         $html           =   $('body');
         $body           =   settings.body;
@@ -122,6 +124,8 @@
     // check for `exports` after `define` in case a build optimizer adds an `exports` object
     }
     else if(typeof module === 'object' && typeof module.exports === 'object') {
+    var $ = require('jquery');
+    var TweenMax = require('gsap');
     module.exports = scrollMomentum;
     }
     else {
